@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, current_app, url_for
 
 
 def configure(app):
@@ -9,7 +9,7 @@ def configure(app):
         return render_template('index.html', todos=todos)
 
 
-    @app.route('/create/')
+    @app.route('/create/', methods=('GET', 'POST'))
     def create():
         if request.method == 'GET':
             return render_template('create.html')
