@@ -1,6 +1,7 @@
 from flask import Flask
 
 import views
+import db
 
 
 def create_app():
@@ -8,5 +9,6 @@ def create_app():
 
     views.configure(app)
 
+    db.configure(app)
+
     return app
-    
