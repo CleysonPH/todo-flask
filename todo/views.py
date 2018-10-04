@@ -24,7 +24,17 @@ def configure(app):
 
     @app.route('/<id>/update/')
     def update(id):
-        return f'Update page {id}'
+        todo = current_app.db.todos.find_one({'_id': id})
+
+        if request.method == 'GET':
+            return render_template('update.html', todo=todo)
+
+        title = request.form['title']
+        description = request.form['description']
+
+        current_app.db.todos.update_one({'_id': todo['_id']}, {'$set': {'title': title, 'description': description}})
+
+        return redirect(url_for('index'))
 
 
     @app.route('/<id>/delete/')
