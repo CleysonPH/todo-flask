@@ -39,4 +39,6 @@ def configure(app):
 
     @app.route('/<id>/delete/')
     def delete(id):
-        return f'Delete page {id}'
+        current_app.db.todos.delete_one({'_id': id})
+
+        return redirect(url_for('index'))
