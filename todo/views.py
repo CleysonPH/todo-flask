@@ -22,7 +22,7 @@ def configure(app):
         return redirect(url_for('index'))
 
 
-    @app.route('/<id>/update/')
+    @app.route('/<id>/update/', methods=('GET', 'POST'))
     def update(id):
         todo = current_app.db.todos.find_one({'_id': id})
 
