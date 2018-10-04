@@ -9,3 +9,4 @@ def create_app():
     views.configure(app)
 
     return app
+    
