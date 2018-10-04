@@ -4,7 +4,9 @@ from flask import render_template, redirect, request
 def configure(app):
     @app.route('/')
     def index():
-        return 'Index Page'
+        todos = current_app.db.todos.find()
+
+        return render_template('index.html', todos=todos)
 
 
     @app.route('/create/')
