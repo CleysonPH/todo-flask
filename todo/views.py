@@ -1,4 +1,5 @@
-from flask import render_template, redirect, request, current_app, url_for
+from datetime import datetime
+from flask import render_template, redirect, request, current_app, url_for, flash
 
 
 def configure(app):
@@ -14,10 +15,26 @@ def configure(app):
         if request.method == 'GET':
             return render_template('create.html')
 
+        error = None
+
         title = request.form['title']
+        
+        delivery_date = request.form['delivery']
+        try:
+            delivery_date = datetime.strptime(delivery_date, '%d/%m/%Y').date()
+
+            if delivery_date <= datetime.now().date():
+                error = 'A data de entrga não pode ser menor que a data atual'
+        except:
+            error = 'A data de entrega está invalida!'
+        
+        if error is not None:
+            flash(error)
+            return redirect(url_for('create'))
+        
         description = request.form['description']
 
-        current_app.db.todos.insert_one({'title': title, 'description': description})
+        current_app.db.todos.insert_one({'title': title,'delivery_date': delivery_date.strftime('%d/%m/%Y'), 'description': description})
 
         return redirect(url_for('index'))
 

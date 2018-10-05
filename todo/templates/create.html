@@ -9,11 +9,29 @@
     <p class="lead">Essa é uma aplicação simples para realizar cadastro de tarefas</p>
     <hr class="my-4">
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
     <form method="POST">
         <div class="form-group">
             <label for="title">Titulo</label>
-            <input type="text" class="form-control" name="title" id="title" placeholder="Digite o titulo">
+            <input type="text" class="form-control" name="title" id="title" placeholder="Ex.: Ir fazer compras">
         </div>
+
+        <div class="form-group">
+            <label for="delivery">Data Entrega</label>
+            <input type="text" class="form-control" name="delivery" id="delivery" placeholder="Ex.: 25/10/2019">
+        </div>
+
         <div class="form-group">
             <label for="description">Descrição</label>
             <textarea class="form-control" name="description" id="description" rows="3"></textarea>

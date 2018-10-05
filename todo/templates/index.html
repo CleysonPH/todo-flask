@@ -13,6 +13,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Titulo</th>
+                        <th scope="col">Data de Entrega</th>
                         <th scope="col">Descrição</th>
                         <th scope="col">Ações</th>
                     </tr>
@@ -21,6 +22,7 @@
                     {% for todo in todos %}
                     <tr>
                         <td>{{ todo.title }}</td>
+                        <td>{{ todo.delivery_date }}</td>
                         <td>{{ todo.description }}</td>
                         <td>
                             <a class="btn btn-warning" href="{{ url_for('update', id=todo._id) }}">Editar</a>

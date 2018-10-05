@@ -11,4 +11,6 @@ def create_app():
 
     db.configure(app)
 
+    app.config['SECRET_KEY'] = 'dev'
+
     return app
